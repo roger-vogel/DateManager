@@ -1,10 +1,10 @@
 
 import UIKit
 
-enum ClockPreference: Int { case c12, c24 }
-enum DateString: Int { case date, dayAndDate, dayDateAndTime }
+public enum ClockPreference: Int { case c12, c24 }
+public enum DateString: Int { case date, dayAndDate, dayDateAndTime }
 
-class DateManager: NSObject {
+public class DateManager: NSObject {
     
     // MARK: - PROPERTIES
     public var theDate: Date?
