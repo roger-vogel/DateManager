@@ -6,6 +6,6 @@ final class DateManagerTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(DateManager().text, "Hello, World!")
+        //XCTAssertEqual(DateManager().text, "Hello, World!")
     }
 }
