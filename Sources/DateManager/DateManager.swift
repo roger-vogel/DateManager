@@ -7,9 +7,9 @@ enum DateString: Int { case date, dayAndDate, dayDateAndTime }
 class DateManager: NSObject {
     
     // MARK: - PROPERTIES
-    var theDate: Date?
-    var dateFormatter = DateFormatter()
-    var clockPreference: ClockPreference = .c12
+    public var theDate: Date?
+    public var dateFormatter = DateFormatter()
+    public var clockPreference: ClockPreference = .c12
    
     let usd = "M/d/YY"
     let eud = "dd/MM/yyyy"
@@ -22,12 +22,12 @@ class DateManager: NSObject {
     let api = "yyyy-MM-dd.HH:mm"
     
     // MARK: - COMPUTED PROPERTIES
-    var dateValue: UInt64 {
+    public var dateValue: UInt64 {
         
         get { return UInt64(theDate!.timeIntervalSince1970) }
     }
     
-    var gmtDate: Date {
+    public var gmtDate: Date {
         
         get {
             
@@ -40,13 +40,13 @@ class DateManager: NSObject {
         }
     }
   
-    var localDate: Date {
+    public var localDate: Date {
         
         get { return theDate! }
         set { theDate = newValue }
     }
   
-    var serverDateAndTime: String {
+    public var serverDateAndTime: String {
         
         get {
             
@@ -64,7 +64,7 @@ class DateManager: NSObject {
         }
     }
     
-    var dateComponents: DateComponents {
+    public var dateComponents: DateComponents {
         
         get {
             
@@ -85,7 +85,7 @@ class DateManager: NSObject {
         set { theDate = NSCalendar.current.date(from: newValue)! }
     }
     
-    var dayDateAndTimeString: String {
+    public var dayDateAndTimeString: String {
         
         get {
             
@@ -102,7 +102,7 @@ class DateManager: NSObject {
         }
     }
     
-    var dayAndDateString: String {
+    public var dayAndDateString: String {
         
         get {
             
@@ -119,7 +119,7 @@ class DateManager: NSObject {
         }
     }
     
-    var dateString: String {
+    public var dateString: String {
         
         get {
             
@@ -134,7 +134,7 @@ class DateManager: NSObject {
         }
     }
     
-    var timeString: String {
+    public var timeString: String {
    
         get {
             
@@ -143,7 +143,7 @@ class DateManager: NSObject {
         }
     }
     
-    var dateAndTimeString: String {
+    public var dateAndTimeString: String {
    
         get {
             
@@ -158,7 +158,7 @@ class DateManager: NSObject {
     }
     
     // MARK: - INITIALIZATION
-    init (date: Date? = Date()) {
+    public init (date: Date? = Date()) {
         
         super.init()
 
@@ -167,7 +167,7 @@ class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
-    init (date: DateManager) {
+    public init (date: DateManager) {
         
         super.init()
 
@@ -176,7 +176,7 @@ class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
-    init (fromServerDateAndTime: String) {
+    public init (fromServerDateAndTime: String) {
         
         super.init()
         
@@ -185,7 +185,7 @@ class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
-    init (fromDayDateAndTime: String) {
+    public init (fromDayDateAndTime: String) {
         
         super.init()
         
@@ -194,7 +194,7 @@ class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
-    init (fromGMTDayDateAndTime: String) {
+    public init (fromGMTDayDateAndTime: String) {
         
         super.init()
         
@@ -204,7 +204,7 @@ class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
-    init (fromDayAndDate: String) {
+    public init (fromDayAndDate: String) {
         
         super.init()
      
@@ -213,7 +213,7 @@ class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
-    init (fromDate: String) {
+    public init (fromDate: String) {
         
         super.init()
         
@@ -223,7 +223,7 @@ class DateManager: NSObject {
     }
        
     // MARK: - METHODS
-    func gmtString(_ inFormat: DateString) -> String {
+    public func gmtString(_ inFormat: DateString) -> String {
         
         let theGMTDate = DateManager(date: gmtDate)
         
@@ -235,7 +235,7 @@ class DateManager: NSObject {
         }
     }
     
-    func convertFromGMT(ddtGMT: String) {
+    public func convertFromGMT(ddtGMT: String) {
         
         dayDateAndTimeString = ddtGMT
         
@@ -246,7 +246,7 @@ class DateManager: NSObject {
         theDate = theLocalDate
     }
    
-    func todayIsInRangeTo(endDate: DateManager) -> Bool {
+    public func todayIsInRangeTo(endDate: DateManager) -> Bool {
         
         let today = DateManager().dateComponents
         let start = dateComponents
@@ -260,7 +260,7 @@ class DateManager: NSObject {
         return false
     }
     
-    func updateDateTo(newDate: DateManager) {
+    public func updateDateTo(newDate: DateManager) {
         
         dateComponents.year = newDate.dateComponents.year!
         dateComponents.month = newDate.dateComponents.month!
@@ -270,7 +270,7 @@ class DateManager: NSObject {
         theDate = NSCalendar.current.date(from: dateComponents)!
     }
     
-    func updateTimeTo(newTime: DateManager) {
+    public func updateTimeTo(newTime: DateManager) {
         
         dateComponents.hour = newTime.dateComponents.hour!
         dateComponents.minute = newTime.dateComponents.minute!
@@ -278,6 +278,3 @@ class DateManager: NSObject {
         theDate = NSCalendar.current.date(from: dateComponents)!
     }
 }
-
-
-
