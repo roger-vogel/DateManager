@@ -157,6 +157,12 @@ public class DateManager: NSObject {
         }
     }
     
+    public var dayOfWeekString: String {
+        
+        let days = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        return days[dateComponents.weekday!]
+    }
+    
     // MARK: - INITIALIZATION
     public init (date: Date? = Date()) {
         
