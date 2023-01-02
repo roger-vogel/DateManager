@@ -19,6 +19,7 @@ public class DateManager: NSObject {
     let eudd = "E dd/MM/yyyy"
     let usddt = "E MM/dd/yyyy 'at' h:mm a"
     let euddt = "E dd/MM/yyyy 'at' HH:mm"
+    let mday = "dd"
     let api = "yyyy-MM-dd.HH:mm"
     
     // MARK: - COMPUTED PROPERTIES
@@ -161,6 +162,21 @@ public class DateManager: NSObject {
         
         let days = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         return days[dateComponents.weekday!]
+    }
+    
+    public var dayOfMonthString: String {
+    
+        var monthDay = String(dateComponents.day!)
+        
+        switch monthDay.last! {
+            
+            case "1": monthDay += "st"
+            case "2": monthDay += "nd"
+            case "3": monthDay += "rd"
+            default: monthDay += "th"
+        }
+   
+        return monthDay
     }
     
     // MARK: - INITIALIZATION
