@@ -162,7 +162,7 @@ public class DateManager: NSObject {
     public var dayOfWeekString: String {
         
         let days = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-        return days[dateComponents.weekday!]
+        return days[dateComponents.weekday!-1]
     }
     
     public var dayOfMonthString: String {
