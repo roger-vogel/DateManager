@@ -78,6 +78,7 @@ public class DateManager: NSObject {
             dateComponents.day = calendar.component(.day, from: theDate!)
             dateComponents.hour = calendar.component(.hour, from: theDate!)
             dateComponents.minute = calendar.component(.minute, from: theDate!)
+            dateComponents.weekday = calendar.component(.weekday, from: theDate!)
             dateComponents.weekOfYear = calendar.component(.weekOfYear, from: theDate!)
             
             return dateComponents
