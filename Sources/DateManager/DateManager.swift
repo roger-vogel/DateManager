@@ -182,7 +182,7 @@ public class DateManager: NSObject {
     
     public var endOfWeek: Date {
         
-        let daysToWeekEnd = 6 - dateComponents.weekday!
+        let daysToWeekEnd = 7 - dateComponents.weekday!
         return theDate!.addingTimeInterval(TimeInterval(84000 * daysToWeekEnd))
         
     }
