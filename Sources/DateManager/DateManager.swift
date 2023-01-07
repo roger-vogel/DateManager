@@ -180,6 +180,13 @@ public class DateManager: NSObject {
         return monthDay
     }
     
+    public var endOfWeek: Date {
+        
+        let daysToWeekEnd = 6 - dateComponents.weekday!
+        return theDate!.addingTimeInterval(TimeInterval(84000 * daysToWeekEnd))
+        
+    }
+    
     // MARK: - INITIALIZATION
     public init (date: Date? = Date()) {
         
