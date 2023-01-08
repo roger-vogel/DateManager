@@ -180,11 +180,44 @@ public class DateManager: NSObject {
         return monthDay
     }
     
+    public var startOfWeek: Date {
+        
+        return endOfWeek.addingTimeInterval(TimeInterval(-604800))
+    }
+    
     public var endOfWeek: Date {
         
         let daysToWeekEnd = 7 - dateComponents.weekday!
         return theDate!.addingTimeInterval(TimeInterval(84000 * daysToWeekEnd))
         
+    }
+    
+    public var isToday: Bool {
+      
+        let today = DateManager().dateComponents
+        
+        if dateComponents.year! == today.year! && dateComponents.month! == today.month! && dateComponents.day! == today.day! { return true }
+        return false
+    }
+    
+    public var isThisWeek: Bool {
+        
+        let dateManager = DateManager()
+        
+        let endOfWeek = dateManager.endOfWeek
+        let startOfWeek = dateManager.startOfWeek
+        
+        if theDate! >= startOfWeek && theDate! <= endOfWeek { return true }
+        return false
+        
+    }
+    
+    public var isUpcoming: Bool {
+        
+        let endOfWeek = DateManager().endOfWeek
+        
+        if theDate! > endOfWeek { return true }
+        return false
     }
     
     // MARK: - INITIALIZATION
