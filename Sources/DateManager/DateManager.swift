@@ -220,6 +220,19 @@ public class DateManager: NSObject {
         return false
     }
     
+    public var isPast: Bool {
+        
+        let components = dateComponents
+        let todaysComponents = DateManager().dateComponents
+        
+        // Is the date in the past?
+        if components.year! < todaysComponents.year! { return true }
+        if components.month! < todaysComponents.month! { return true }
+        if components.day! < todaysComponents.day! { return true }
+        
+        return false
+    }
+    
     // MARK: - INITIALIZATION
     public init (date: Date? = Date()) {
         
