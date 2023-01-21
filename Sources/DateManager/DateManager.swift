@@ -11,6 +11,8 @@ public class DateManager: NSObject {
     public var dateFormatter = DateFormatter()
     public var clockPreference: ClockPreference = .c12
    
+    let usds = "MM/dd"
+    let euds = "dd/MM"
     let usd = "M/d/YY"
     let eud = "dd/MM/yyyy"
     let ust = "h:mm a"
@@ -85,6 +87,24 @@ public class DateManager: NSObject {
         }
         
         set { theDate = NSCalendar.current.date(from: newValue)! }
+    }
+    
+    public var shortDateString: String {
+        
+        get {
+            
+            if clockPreference == .c12 { dateFormatter.dateFormat = usds } else {dateFormatter.dateFormat = euds }
+            return dateFormatter.string(from: theDate!)
+        }
+        
+        set {
+            
+            if clockPreference == .c12 { dateFormatter.dateFormat = usds }
+            else { dateFormatter.dateFormat = euds }
+            
+            theDate = dateFormatter.date(from: newValue)
+        }
+        
     }
     
     public var dayDateAndTimeString: String {
