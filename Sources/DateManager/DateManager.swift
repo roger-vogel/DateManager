@@ -82,7 +82,7 @@ public class DateManager: NSObject {
             dateComponents.minute = calendar.component(.minute, from: theDate!)
             dateComponents.weekday = calendar.component(.weekday, from: theDate!)
             dateComponents.weekOfYear = calendar.component(.weekOfYear, from: theDate!)
-            
+          
             return dateComponents
         }
         
@@ -199,7 +199,7 @@ public class DateManager: NSObject {
    
         return monthDay
     }
-    
+        
     public var dayOfWeek: Int {
         
         return dateComponents.weekday!
@@ -377,5 +377,17 @@ public class DateManager: NSObject {
         dateComponents.minute = newTime.dateComponents.minute!
         
         theDate = NSCalendar.current.date(from: dateComponents)!
+    }
+    
+    public func isSameDay(comparing: DateManager) -> Bool {
+        
+        let myDateComponents = dateComponents
+        let comparetToDateComponents = comparing.dateComponents
+        
+        if myDateComponents.year! == comparetToDateComponents.year! &&
+           myDateComponents.month! == comparetToDateComponents.month! &&
+           myDateComponents.day! == comparetToDateComponents.day! { return true }
+       
+        return false
     }
 }
