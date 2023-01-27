@@ -82,7 +82,7 @@ public class DateManager: NSObject {
             dateComponents.minute = calendar.component(.minute, from: theDate!)
             dateComponents.weekday = calendar.component(.weekday, from: theDate!)
             dateComponents.weekOfYear = calendar.component(.weekOfYear, from: theDate!)
-          
+        
             return dateComponents
         }
         
@@ -199,7 +199,12 @@ public class DateManager: NSObject {
    
         return monthDay
     }
+    
+    public var dayOfMonthNumberString: String {
         
+        return String(dateComponents.day!)
+    }
+    
     public var dayOfWeek: Int {
         
         return dateComponents.weekday!
