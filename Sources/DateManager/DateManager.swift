@@ -398,7 +398,7 @@ public class DateManager: NSObject {
     
     public func isIn(month: Int16)-> Bool {
         
-        if Int16(dateComponents.month!) == month { return true }
+        if Int16(dateComponents.month!) == month + 1 { return true }
         return false
     }
 }
