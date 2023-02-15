@@ -401,4 +401,5 @@ public class DateManager: NSObject {
         if Int16(dateComponents.month!) == month + 1 { return true }
         return false
     }
+    
 }
