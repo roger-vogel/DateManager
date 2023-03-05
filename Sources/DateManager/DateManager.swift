@@ -23,6 +23,7 @@ public class DateManager: NSObject {
     let euddt = "E dd/MM/yyyy 'at' HH:mm"
     let mday = "dd"
     let api = "yyyy-MM-dd.HH:mm"
+    let dot = "yyyy.MM.dd"
     
     // MARK: - COMPUTED PROPERTIES
     public var dateValue: UInt64 {
@@ -154,6 +155,12 @@ public class DateManager: NSObject {
             if clockPreference == .c12 { dateFormatter.dateFormat = usd } else { dateFormatter.dateFormat = eud }
             theDate = dateFormatter.date(from: newValue)
         }
+    }
+    
+    public var dotString: String {
+        
+        dateFormatter.dateFormat = dot
+        return dateFormatter.string(from: theDate!)
     }
     
     public var timeString: String {
