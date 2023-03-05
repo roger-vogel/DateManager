@@ -24,6 +24,7 @@ public class DateManager: NSObject {
     let mday = "dd"
     let api = "yyyy-MM-dd.HH:mm"
     let dot = "yyyy.MM.dd"
+    let cyr = "yyyy"
     
     // MARK: - COMPUTED PROPERTIES
     public var dateValue: UInt64 {
@@ -210,6 +211,12 @@ public class DateManager: NSObject {
     public var dayOfMonthNumberString: String {
         
         return String(dateComponents.day!)
+    }
+    
+    public var cleanYearString: String {
+        
+        dateFormatter.dateFormat = cyr
+        return dateFormatter.string(from: theDate!)
     }
     
     public var dayOfWeek: Int {
