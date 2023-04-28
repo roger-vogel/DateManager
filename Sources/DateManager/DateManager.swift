@@ -268,8 +268,8 @@ public class DateManager: NSObject {
         
         let endOfWeek = DateManager(date: dateManager.endOfWeek)
         
-        if dateComponents.year! > endOfWeek.dateComponents.year! &&
-           dateComponents.month! > endOfWeek.dateComponents.month! &&
+        if dateComponents.year! > endOfWeek.dateComponents.year! ||
+           dateComponents.month! > endOfWeek.dateComponents.month! ||
            dateComponents.day! > endOfWeek.dateComponents.day! { return true }
           
         return false
