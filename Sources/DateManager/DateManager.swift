@@ -251,7 +251,7 @@ public class DateManager: NSObject {
         let endOfWeek = dateManager.endOfWeek
         let startOfWeek = dateManager.startOfWeek
         
-        if gmtDate >= startOfWeek && gmtDate <= endOfWeek { return true }
+        if theDate! >= startOfWeek && theDate! <= endOfWeek { return true }
         return false
         
     }
