@@ -264,9 +264,14 @@ public class DateManager: NSObject {
     
     public var isUpcoming: Bool {
         
-        let endOfWeek = DateManager().endOfWeek
+        let dateManager = DateManager()
         
-        if theDate! > endOfWeek { return true }
+        let endOfWeek = DateManager(date: dateManager.endOfWeek)
+        
+        if dateComponents.year! > endOfWeek.dateComponents.year! &&
+           dateComponents.month! > endOfWeek.dateComponents.month! &&
+           dateComponents.day! > endOfWeek.dateComponents.day! { return true }
+          
         return false
     }
     
