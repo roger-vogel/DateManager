@@ -27,6 +27,11 @@ public class DateManager: NSObject {
     let cyr = "yyyy"
     
     // MARK: - COMPUTED PROPERTIES
+    public var dateNumber: Int {
+        
+       return dateComponents.year!*10000 + dateComponents.month!*100 + dateComponents.day!
+    }
+    
     public var dateValue: UInt64 {
         
         get { return UInt64(theDate!.timeIntervalSince1970) }
@@ -247,9 +252,9 @@ public class DateManager: NSObject {
     
     public var isToday: Bool {
       
-        let todayComponents = DateManager(localizedDate: Date()).dateComponents
-        
-        if dateComponents.year! == todayComponents.year! && dateComponents.month! == todayComponents.month! && dateComponents.day! == todayComponents.day! { return true }
+        let todayNumber = DateManager(localizedDate: Date()).dateNumber
+        if dateNumber == todayNumber { return true }
+
         return false
     }
     
@@ -257,15 +262,10 @@ public class DateManager: NSObject {
         
         let dateManager = DateManager(localizedDate: Date())
         
-        let endOfWeek = DateManager(date: dateManager.endOfWeek)
-        let startOfWeek = DateManager(date: dateManager.startOfWeek)
+        let endOfWeek = DateManager(date: dateManager.endOfWeek).dateNumber
+        let startOfWeek = DateManager(date: dateManager.startOfWeek).dateNumber
         
-        if dateComponents.year! >= startOfWeek.dateComponents.year! &&
-           dateComponents.month! >= startOfWeek.dateComponents.month! &&
-           dateComponents.day! >= startOfWeek.dateComponents.day! &&
-           dateComponents.year! <= endOfWeek.dateComponents.year! &&
-           dateComponents.month! <= endOfWeek.dateComponents.month! &&
-           dateComponents.day! <= endOfWeek.dateComponents.day! { return true }
+        if dateNumber >= startOfWeek && dateNumber <= endOfWeek { return true }
         
         return false
         
@@ -273,27 +273,19 @@ public class DateManager: NSObject {
     
     public var isUpcoming: Bool {
         
-        let dateManager = DateManager().localizedDate
+        let dateManager = DateManager(localizedDate: Date())
+        let endOfWeek = DateManager(date: dateManager.endOfWeek).dateNumber
         
-        let endOfWeek = DateManager(date: dateManager.endOfWeek)
+        if dateNumber > endOfWeek { return true }
         
-        if dateComponents.year! > endOfWeek.dateComponents.year! ||
-           dateComponents.month! > endOfWeek.dateComponents.month! ||
-           dateComponents.day! > endOfWeek.dateComponents.day! { return true }
-          
         return false
     }
     
     public var isPast: Bool {
         
-        let todayComponents = DateManager().localizedDate.dateComponents
-        let dateComponents = dateComponents
-        
-        let todayNumber = todayComponents.year!*10000 + todayComponents.month! * 100 + todayComponents.day!
-        let dateNumber = dateComponents.year!*10000 + dateComponents.month! * 100 + dateComponents.day!
-        
+        let todayNumber = DateManager(localizedDate: Date()).dateNumber
         if todayNumber > dateNumber { return true }
-        
+      
         return false
     }
     
