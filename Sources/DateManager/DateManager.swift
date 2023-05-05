@@ -247,7 +247,7 @@ public class DateManager: NSObject {
     
     public var isToday: Bool {
       
-        let todayComponents = DateManager().localizedDate.dateComponents
+        let todayComponents = DateManager(localizedDate: Date()).dateComponents
         
         if dateComponents.year! == todayComponents.year! && dateComponents.month! == todayComponents.month! && dateComponents.day! == todayComponents.day! { return true }
         return false
