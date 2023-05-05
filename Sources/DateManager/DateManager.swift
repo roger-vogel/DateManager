@@ -307,6 +307,12 @@ public class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
+    public init (localizedDate: Date) {
+        
+        super.init()
+        theDate = DateManager(date: localizedDate).localizedDate.theDate!
+    }
+    
     public init (date: DateManager) {
         
         super.init()
