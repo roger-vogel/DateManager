@@ -45,14 +45,20 @@ public class DateManager: NSObject {
         }
     }
     
-    public var localDate: Date {
+    public var adjustedDate: DateManager {
         
         var GMTDate = Date()
         
         let secondsFromGMT = TimeZone.current.secondsFromGMT()
         GMTDate = theDate!.addingTimeInterval(TimeInterval(secondsFromGMT))
         
-        return GMTDate
+        return DateManager(date: GMTDate)
+    }
+  
+    public var localDate: Date {
+        
+        get { return theDate! }
+        set { theDate = newValue }
     }
   
     public var serverDateAndTime: String {
@@ -426,12 +432,3 @@ public class DateManager: NSObject {
     }
     
 }
-
-
-/*
- public var localDate: Date {
-     
-     get { return theDate! }
-     set { theDate = newValue }
- }
- */
