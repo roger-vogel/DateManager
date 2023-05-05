@@ -236,26 +236,26 @@ public class DateManager: NSObject {
     
     public var startOfWeek: Date {
         
-        return localizedDate.endOfWeek.addingTimeInterval(TimeInterval(-604800))
+        return endOfWeek.addingTimeInterval(TimeInterval(-604800))
     }
     
     public var endOfWeek: Date {
         
         let daysToWeekEnd = 7 - dateComponents.weekday!
-        return localizedDate.theDate!.addingTimeInterval(TimeInterval(84000 * daysToWeekEnd))
+        return theDate!.addingTimeInterval(TimeInterval(84000 * daysToWeekEnd))
     }
     
     public var isToday: Bool {
       
         let todayComponents = DateManager().localizedDate.dateComponents
         
-        if localizedDate.dateComponents.year! == todayComponents.year! &&  localizedDate.dateComponents.month! == todayComponents.month! &&  localizedDate.dateComponents.day! == todayComponents.day! { return true }
+        if dateComponents.year! == todayComponents.year! && dateComponents.month! == todayComponents.month! && dateComponents.day! == todayComponents.day! { return true }
         return false
     }
     
     public var isThisWeek: Bool {
         
-        let dateManager = DateManager().localizedDate
+        let dateManager = DateManager(localizedDate: Date())
         
         let endOfWeek = DateManager(date: dateManager.endOfWeek)
         let startOfWeek = DateManager(date: dateManager.startOfWeek)
@@ -287,7 +287,7 @@ public class DateManager: NSObject {
     public var isPast: Bool {
         
         let todayComponents = DateManager().localizedDate.dateComponents
-        let dateComponents = localizedDate.dateComponents
+        let dateComponents = dateComponents
         
         let todayNumber = todayComponents.year!*10000 + todayComponents.month! * 100 + todayComponents.day!
         let dateNumber = dateComponents.year!*10000 + dateComponents.month! * 100 + dateComponents.day!
