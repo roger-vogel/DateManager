@@ -273,7 +273,7 @@ public class DateManager: NSObject {
     
     public var isUpcoming: Bool {
         
-        let dateManager = DateManager()
+        let dateManager = DateManager().localizedDate
         
         let endOfWeek = DateManager(date: dateManager.endOfWeek)
         
@@ -286,7 +286,7 @@ public class DateManager: NSObject {
     
     public var isPast: Bool {
         
-        let todayComponents = DateManager().dateComponents
+        let todayComponents = DateManager().localizedDate.dateComponents
         let dateComponents = localizedDate.dateComponents
         
         let todayNumber = todayComponents.year!*10000 + todayComponents.month! * 100 + todayComponents.day!
@@ -301,8 +301,8 @@ public class DateManager: NSObject {
     public init (date: Date? = Date()) {
         
         super.init()
-        
-        theDate = DateManager().localizedDate.theDate!
+
+        theDate = date
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
     }
