@@ -311,6 +311,15 @@ public class DateManager: NSObject {
         dateFormatter.pmSymbol = "PM"
     }
     
+    public init (localizedDate: DateManager) {
+        
+        super.init()
+
+        theDate = localizedDate.adjustedDate.theDate!
+        dateFormatter.amSymbol = "AM"
+        dateFormatter.pmSymbol = "PM"
+    }
+    
     public init (fromServerDateAndTime: String) {
         
         super.init()
