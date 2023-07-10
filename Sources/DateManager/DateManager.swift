@@ -8,6 +8,7 @@ public class DateManager: NSObject {
     
     // MARK: - PROPERTIES
     public var theDate: Date?
+    public var dateToLocalize: Date?
     public var dateFormatter = DateFormatter()
     public var clockPreference: ClockPreference = .c12
    
@@ -37,29 +38,6 @@ public class DateManager: NSObject {
         get { return UInt64(theDate!.timeIntervalSince1970) }
     }
     
-    public var gmtDate: Date {
-        
-        get {
-            
-            var GMTDate = Date()
-            
-            let secondsFromGMT = -(TimeZone.current.secondsFromGMT())
-            GMTDate = theDate!.addingTimeInterval(TimeInterval(secondsFromGMT))
-            
-            return GMTDate
-        }
-    }
-    
-    public var localizedDate: DateManager {
-        
-        var GMTDate = Date()
-        
-        let secondsFromGMT = TimeZone.current.secondsFromGMT()
-        GMTDate = theDate!.addingTimeInterval(TimeInterval(secondsFromGMT))
-        
-        return DateManager(date: GMTDate)
-    }
-  
     public var localDate: Date {
         
         get { return theDate! }
@@ -71,16 +49,16 @@ public class DateManager: NSObject {
         get {
             
             dateFormatter.dateFormat = api
-            return dateFormatter.string(from: gmtDate)
+            return dateFormatter.string(from: theDate!)
         }
            
         set {
             
             dateFormatter.dateFormat = api
-            let gmtDate = dateFormatter.date(from: newValue)!
+            theDate = dateFormatter.date(from: newValue)!
             
             let secondsFromGMT = TimeZone.current.secondsFromGMT()
-            theDate = gmtDate.addingTimeInterval(TimeInterval(secondsFromGMT))
+            theDate = theDate!.addingTimeInterval(TimeInterval(secondsFromGMT))
         }
     }
     
@@ -251,8 +229,8 @@ public class DateManager: NSObject {
     }
     
     public var isToday: Bool {
-      
-        let todayNumber = DateManager(localizedDate: Date()).dateNumber
+    
+        let todayNumber = DateManager(date: theDate!).dateNumber
         if dateNumber == todayNumber { return true }
 
         return false
@@ -260,12 +238,13 @@ public class DateManager: NSObject {
     
     public var isThisWeek: Bool {
         
-        let dateManager = DateManager(localizedDate: Date())
+        let endOfWeekDate = DateManager(date: theDate!).endOfWeek
+        let startofWeekDate = DateManager(date: theDate!).startOfWeek
         
-        let endOfWeek = DateManager(date: dateManager.endOfWeek).dateNumber
-        let startOfWeek = DateManager(date: dateManager.startOfWeek).dateNumber
+        let endOfWeekNumber = DateManager(date: endOfWeekDate).dateNumber
+        let startOfWeekNumber = DateManager(date: startofWeekDate).dateNumber
         
-        if dateNumber >= startOfWeek && dateNumber <= endOfWeek { return true }
+        if dateNumber >= startOfWeekNumber && dateNumber <= endOfWeekNumber { return true }
         
         return false
         
@@ -273,47 +252,38 @@ public class DateManager: NSObject {
     
     public var isUpcoming: Bool {
         
-        let dateManager = DateManager(localizedDate: Date())
-        let endOfWeek = DateManager(date: dateManager.endOfWeek).dateNumber
+        let endOfWeekDate = DateManager(date: theDate!).endOfWeek
+        let endOfWeekNumber = DateManager(date: endOfWeekDate).dateNumber
         
-        if dateNumber > endOfWeek { return true }
+        if dateNumber > endOfWeekNumber { return true }
         
         return false
     }
     
     public var isPast: Bool {
         
-        let todayNumber = DateManager(localizedDate: Date()).dateNumber
+        let todayNumber = DateManager(date: theDate!).dateNumber
         if todayNumber > dateNumber { return true }
       
         return false
     }
     
     // MARK: - INITIALIZATION
-    public init (date: Date? = Date()) {
+    public init (date: Date? = Date(), localize: Bool? = false) {
         
         super.init()
 
-        theDate = date
+        if localize! {
+            
+            let secondsFromGMT = TimeZone.current.secondsFromGMT()
+            theDate = dateToLocalize!.addingTimeInterval(TimeInterval(secondsFromGMT))
+            
+        } else { theDate = date }
+     
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
     }
-    
-    public init (localizedDate: Date) {
         
-        super.init()
-        theDate = DateManager(date: localizedDate).localizedDate.theDate!
-    }
-    
-    public init (date: DateManager) {
-        
-        super.init()
-
-        theDate = date.localDate
-        dateFormatter.amSymbol = "AM"
-        dateFormatter.pmSymbol = "PM"
-    }
-    
     public init (fromServerDateAndTime: String) {
         
         super.init()
@@ -363,13 +333,13 @@ public class DateManager: NSObject {
     // MARK: - METHODS
     public func gmtString(_ inFormat: DateString) -> String {
         
-        let theGMTDate = DateManager(date: gmtDate)
+        let thebaseDate = DateManager(date: theDate)
         
         switch inFormat {
             
-            case .date: return theGMTDate.dateString
-            case .dayAndDate: return theGMTDate.dayAndDateString
-            case .dayDateAndTime: return theGMTDate.dayDateAndTimeString
+            case .date: return thebaseDate.dateString
+            case .dayAndDate: return thebaseDate.dayAndDateString
+            case .dayDateAndTime: return thebaseDate.dayDateAndTimeString
         }
     }
     
