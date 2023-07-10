@@ -8,7 +8,6 @@ public class DateManager: NSObject {
     
     // MARK: - PROPERTIES
     public var theDate: Date?
-    public var dateToLocalize: Date?
     public var dateFormatter = DateFormatter()
     public var clockPreference: ClockPreference = .c12
    
@@ -276,7 +275,7 @@ public class DateManager: NSObject {
         if localize! {
             
             let secondsFromGMT = TimeZone.current.secondsFromGMT()
-            theDate = dateToLocalize!.addingTimeInterval(TimeInterval(secondsFromGMT))
+            theDate = date!.addingTimeInterval(TimeInterval(secondsFromGMT))
             
         } else { theDate = date }
      
