@@ -229,7 +229,7 @@ public class DateManager: NSObject {
     
     public var isToday: Bool {
     
-        let todayNumber = DateManager(date: theDate!).dateNumber
+        let todayNumber = DateManager(date: Date()).dateNumber
         if dateNumber == todayNumber { return true }
 
         return false
