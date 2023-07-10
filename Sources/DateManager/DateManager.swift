@@ -237,8 +237,8 @@ public class DateManager: NSObject {
     
     public var isThisWeek: Bool {
         
-        let endOfWeekDate = DateManager(date: theDate!).endOfWeek
-        let startofWeekDate = DateManager(date: theDate!).startOfWeek
+        let endOfWeekDate = DateManager(date: Date()).endOfWeek
+        let startofWeekDate = DateManager(date: Date()).startOfWeek
         
         let endOfWeekNumber = DateManager(date: endOfWeekDate).dateNumber
         let startOfWeekNumber = DateManager(date: startofWeekDate).dateNumber
@@ -251,7 +251,7 @@ public class DateManager: NSObject {
     
     public var isUpcoming: Bool {
         
-        let endOfWeekDate = DateManager(date: theDate!).endOfWeek
+        let endOfWeekDate = DateManager(date:Date()).endOfWeek
         let endOfWeekNumber = DateManager(date: endOfWeekDate).dateNumber
         
         if dateNumber > endOfWeekNumber { return true }
