@@ -103,7 +103,7 @@ public class DateManager: NSObject {
         
     }
     
-    public var dayDateaAndTimeWithSecondsString: String {
+    public var dayDateAndTimeWithSecondsString: String {
         
         get {
             
