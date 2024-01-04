@@ -21,6 +21,8 @@ public class DateManager: NSObject {
     let eudd = "E dd/MM/yyyy"
     let usddt = "E MM/dd/yyyy 'at' h:mm a"
     let euddt = "E dd/MM/yyyy 'at' HH:mm"
+    let usddts = "E MM/dd/yyyy 'at' h:mm:ss a"
+    let euddts = "E dd/MM/yyyy 'at' HH:mm:ss"
     let mday = "dd"
     let api = "yyyy-MM-dd.HH:mm"
     let dot = "yyyy.MM.dd"
@@ -99,6 +101,23 @@ public class DateManager: NSObject {
             theDate = dateFormatter.date(from: newValue)
         }
         
+    }
+    
+    public var dayDateaAndTimeWithSecondsString: String {
+        
+        get {
+            
+            if clockPreference == .c12 { dateFormatter.dateFormat = usddts } else {dateFormatter.dateFormat = euddts }
+            return dateFormatter.string(from: theDate!)
+        }
+        
+        set {
+            
+            if clockPreference == .c12 { dateFormatter.dateFormat = usddts }
+            else { dateFormatter.dateFormat = euddts }
+            
+            theDate = dateFormatter.date(from: newValue)
+        }
     }
     
     public var dayDateAndTimeString: String {
