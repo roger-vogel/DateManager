@@ -68,7 +68,8 @@ public class DateManager: NSObject {
         get {
             
             var dateComponents = DateComponents()
-            let calendar = Calendar.current
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone.current
             
             // Convert and store as date components in appointment record
             dateComponents.year = calendar.component(.year, from: theDate!)
@@ -262,6 +263,7 @@ public class DateManager: NSObject {
         let endOfWeekNumber = DateManager(date: endOfWeekDate).dateNumber
         let startOfWeekNumber = DateManager(date: startofWeekDate).dateNumber
         
+        if dateNumber < DateManager(date: Date()).dateNumber { return false }
         if dateNumber >= startOfWeekNumber && dateNumber <= endOfWeekNumber { return true }
         
         return false
@@ -280,7 +282,7 @@ public class DateManager: NSObject {
     
     public var isPast: Bool {
         
-        let todayNumber = DateManager(date: theDate!).dateNumber
+        let todayNumber = DateManager(date: Date()).dateNumber
         if todayNumber > dateNumber { return true }
       
         return false
