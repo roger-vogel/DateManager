@@ -288,6 +288,15 @@ public class DateManager: NSObject {
         return false
     }
     
+    public var partOfDay: String? {
+        
+        let dateComponents = Calendar.current.dateComponents(in: .current, from: Date())
+        
+        if dateComponents.hour! >= 0 && dateComponents.hour! < 12 { return "Morning" }
+        else if dateComponents.hour! >= 12 && dateComponents.hour! < 18 { return "Afternoon" }
+        else { return "Evening" }
+    }
+    
     // MARK: - INITIALIZATION
     public init (date: Date? = Date(), localize: Bool? = false) {
         
@@ -425,3 +434,6 @@ public class DateManager: NSObject {
     }
     
 }
+/*
+ 
+ */
